@@ -1,15 +1,14 @@
 # start my own os - stein
 # by sonne
 # Oct 11 2016
-
-	.org 0x7c00
+	.code16
+	.section .text
+	.globl _start
+_start:
 	movw %cs, %ax
 	movw %ax, %ds
 	movw %ax, %es
-	call print_str
-	s:jmp s
 
-print_str:
 	movw $str, %ax
 	movw %ax, %bp
 	movw $16, %cx
@@ -17,7 +16,8 @@ print_str:
 	movw $0x000c, %bx
 	movb $0, %dl
 	int $0x10
-	ret
+loop:
+	jmp loop
 str:	.ascii "my stein--my os."
-	.space 510
-	.long 0xaa55
+	.org 510
+	.word 0xaa55
