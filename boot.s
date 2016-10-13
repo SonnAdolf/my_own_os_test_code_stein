@@ -1,4 +1,4 @@
-# start my own os - stein
+# start my own os - steini
 # by sonne
 # Oct 11 2016
 	.code16
@@ -8,7 +8,8 @@ _start:
 	movw %cs, %ax
 	movw %ax, %ds
 	movw %ax, %es
-
+	call print_str
+print_str:
 	movw $str, %ax
 	movw %ax, %bp
 	movw $0x10, %cx
